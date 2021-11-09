@@ -1,0 +1,7 @@
+.linear-gradient {
+    -fx-background-color: linear-gradient(to bottom left, #020024, #090979, #00d4ff);
+}
+
+.rounded-corners {
+    -fx-background-radius: 25;
+}
