@@ -1,17 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<GridPane fx:controller="com.kalkulator123.subnetcalculator.MainController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" minWidth="300" minHeight="150">
-   <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
-
-   <Text text="Welcome"
-         GridPane.columnIndex="0" GridPane.rowIndex="0"
-         GridPane.columnSpan="2"/>
+<GridPane alignment="center" hgap="10" minHeight="150" minWidth="300" prefHeight="578.0" prefWidth="466.0" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kalkulator123.subnetcalculator.MainController">
+   <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
+   <TextField text="192.168.0.1" GridPane.rowIndex="3" />
+   <ComboBox prefWidth="150.0" GridPane.rowIndex="5" />
+   <ComboBox prefWidth="150.0" GridPane.rowIndex="7" />
+   <ComboBox prefWidth="150.0" GridPane.rowIndex="9" />
+   <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   <TextField editable="false" layoutX="264.0" layoutY="91.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   <TextField editable="false" layoutX="264.0" layoutY="126.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+   <ComboBox layoutX="104.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+   <ComboBox layoutX="263.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+   <TextField editable="false" layoutX="263.0" layoutY="161.0" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+   <TextField editable="false" layoutX="263.0" layoutY="143.0" GridPane.rowIndex="13" />
+   <TextField editable="false" layoutX="103.0" layoutY="266.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+   <TextField editable="false" layoutX="103.0" layoutY="231.0" GridPane.columnSpan="2" GridPane.rowIndex="15" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class" />
+   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Octet Range" GridPane.columnIndex="1" />
+   <Text layoutX="263.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address" GridPane.rowIndex="2" />
+   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hex IP Address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet Mask" GridPane.rowIndex="4" />
+   <Text layoutX="103.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wildcard Mask" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+   <Text layoutX="103.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet Bits" GridPane.rowIndex="6" />
+   <Text layoutX="103.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mask Bits" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+   <Text layoutX="63.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum Subnets" GridPane.rowIndex="8" />
+   <Text layoutX="63.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hosts per Subnet" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+   <Text layoutX="63.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host Address Range" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+   <Text layoutX="63.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet ID" GridPane.rowIndex="12" />
+   <Text layoutX="63.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Broadcast Address" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+   <Text layoutX="63.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class" GridPane.columnSpan="2" GridPane.rowIndex="14" />
+   <Group GridPane.rowIndex="1">
+      <children>
+         <RadioButton mnemonicParsing="false" snapToPixel="false" text="A" />
+         <RadioButton layoutX="50.0" mnemonicParsing="false" text="B" />
+         <RadioButton layoutX="100.0" mnemonicParsing="false" selected="true" text="C" />
+      </children>
+   </Group>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 
 </GridPane>

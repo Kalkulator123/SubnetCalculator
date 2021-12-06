@@ -1,5 +1,6 @@
 package com.kalkulator123.subnetcalculator;
 
+import javafx.scene.Scene;
 import javafx.util.Pair;
 
 import java.math.BigInteger;
@@ -26,10 +27,12 @@ enum CalculatorValues {
 }
 
 public class Calculator {
+    private Scene scene;
     private final EnumMap<CalculatorValues, String> valueMap =
             new EnumMap<>(CalculatorValues.class);
 
-    public Calculator() {
+    public Calculator(Scene scene) {
+        this.scene = scene;
         setNetworkClass("C");
         System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
 

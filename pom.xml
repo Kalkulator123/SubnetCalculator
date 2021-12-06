@@ -39,7 +39,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>charm-glisten</id>
+            <name>charm-glisten Repository</name>
+            <url>http://nexus.gluonhq.com/nexus/content/repositories/releases/com/gluonhq/charm-glisten/4.4.1/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
@@ -47,8 +54,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>15</source>
+                    <target>15</target>
                 </configuration>
             </plugin>
             <plugin>

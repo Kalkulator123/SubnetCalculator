@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SubnetCalculator extends Application {
+    public static Scene scene;
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-view.fxml")));
 
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Subnet Calculator");
@@ -25,6 +26,6 @@ public class SubnetCalculator extends Application {
 
     public static void main(String[] args) {
         launch();
-        Calculator calc = new Calculator();
+        Calculator calc = new Calculator(scene);
     }
 }
