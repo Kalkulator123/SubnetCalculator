@@ -5,7 +5,6 @@ import javafx.util.Pair;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class Calculator {
                 setValue(CalculatorValues.FirstOctetRange, "192-223");
                 setIPAddress("192.168.0.1");
             }
-            default -> {
+            case "A" -> {
                 setValue(CalculatorValues.NetworkClass, className);
                 setValue(CalculatorValues.FirstOctetRange, "1-126");
                 setIPAddress("10.0.0.1");
@@ -152,7 +151,6 @@ public class Calculator {
             case "C" -> 3;
             default -> 0;
         };
-
         for(int i = 0; i < bitArray.length; i++) {
             for(int j = 0; j < 8; j++) {
                 bitArray[i][j] = i < closeOn;
@@ -190,36 +188,30 @@ public class Calculator {
         }
     }
 
+    public int subnetClass(){
+        int value=0;
+        switch (getValue(CalculatorValues.NetworkClass)) {
+            case "A" -> value = 8;
+            case "B" -> value = 16;
+            case "C" -> value = 24;
+        }
+        return value;
+    }
     public List<String> getSubnetBitsList() {
         List<String> subnetBitsList = new ArrayList<>();
         int subnetMaskLength = 8*4;
-        int index = 0;
-
-        switch (getValue(CalculatorValues.NetworkClass)) {
-            case "A" -> index = 8;
-            case "B" -> index = 16;
-            case "C" -> index = 24;
-        }
-
         int subnetBits = 0;
-        for (int i = index - 1; i < subnetMaskLength - 2; i++) {
+        for (int i = subnetClass() - 1; i < subnetMaskLength - 2; i++) {
             subnetBitsList.add(String.valueOf(subnetBits++));
         }
 
         return subnetBitsList;
     }
-
     public List<String> getMaskBitsList() {
         List<String> subnetBitsList = new ArrayList<>();
 
         int subnetMaskLength = 8*4;
-        int subnetBits = 0;
-
-        switch (getValue(CalculatorValues.NetworkClass)) {
-            case "A" -> subnetBits = 8;
-            case "B" -> subnetBits = 16;
-            case "C" -> subnetBits = 24;
-        }
+        int subnetBits = subnetClass();
 
         for (int i = subnetBits; i <= subnetMaskLength - 2; i++) {
             subnetBitsList.add(String.valueOf(subnetBits++));
@@ -240,7 +232,6 @@ public class Calculator {
         }
         return maximumSubnetsList;
     }
-
     public List<String> getHostsPerSubnetList() {
         List<String> subnetBitsList = getMaskBitsList();
         List<String> hostsPerSubnetList = new ArrayList<>();
