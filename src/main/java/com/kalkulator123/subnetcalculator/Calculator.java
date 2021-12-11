@@ -29,7 +29,7 @@ public class Calculator {
             new EnumMap<>(CalculatorValues.class);
 
     public Calculator() {
-        setNetworkClass("A");
+        setNetworkClass("C");
         System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
 
         setIPAddress("10.0.0.1");
@@ -148,7 +148,6 @@ public class Calculator {
             case "C" -> 3;
             default -> 0;
         };
-
         for(int i = 0; i < bitArray.length; i++) {
             for(int j = 0; j < 8; j++) {
                 bitArray[i][j] = i < closeOn;
