@@ -110,11 +110,11 @@ public class Calculator {
 
         String ipAddress = String.join(".", ip);
         setValue(CalculatorValues.IPAddress, ipAddress);
-        setHexIPAddress(getValue(CalculatorValues.IPAddress));
-        setSubnetID(getValue(CalculatorValues.IPAddress));
+        setHexIPAddress();
+        setSubnetID();
     }
 
-    private void setHexIPAddress(String ipAddress) {
+    private void setHexIPAddress() {
         StringBuilder hexIP = new StringBuilder();
 
         for (String value : ip) {
@@ -127,7 +127,7 @@ public class Calculator {
         setValue(CalculatorValues.HexIPAddress, hexIP.toString().toUpperCase());
     }
 
-    private void setSubnetID(String ipAddress) {
+    private void setSubnetID() {
         StringBuilder subnetID = new StringBuilder();
 
         subnetID.append(ip[0]).append(".");
