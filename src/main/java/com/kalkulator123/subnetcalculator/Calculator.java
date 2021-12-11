@@ -31,11 +31,13 @@ public class Calculator {
     private Scene scene;
     private final EnumMap<CalculatorValues, String> valueMap =
             new EnumMap<>(CalculatorValues.class);
-
+    private String[] ip;
     public Calculator(Scene scene) {
         this.scene = scene;
         String IPAdress = "123.123.123.123";
+        //setIPAddress(IPAdress); MUSI SIĘ WYKONAĆ PRZED INNYMI FUNKCJAMI CO LICZĄ BO TAM SIĘ POPRAWIA BY BYŁ ZGODNY Z CLASSĄ
         if(isValidIPAddress(IPAdress)){
+            ip = IPAdress.split("\\.");
             setNetworkClass("C");
             System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
 
@@ -102,7 +104,6 @@ public class Calculator {
         String[] octet = getValue(CalculatorValues.FirstOctetRange).split("-");
         Pair<Integer, Integer> range = new Pair<>(Integer.parseInt(octet[0]), Integer.parseInt(octet[1]));
 
-        String[] ip = ipAddress.split("\\.");
 
         if(!(Integer.parseInt(ip[0]) >= range.getKey() && Integer.parseInt(ip[0]) <= range.getValue())) {
             ip[0]=range.getKey().toString();
@@ -114,7 +115,6 @@ public class Calculator {
     }
 
     private void setHexIPAddress(String ipAddress) {
-        String[] ip = ipAddress.split("\\.");
         StringBuilder hexIP = new StringBuilder();
 
         for (String value : ip) {
@@ -128,7 +128,6 @@ public class Calculator {
     }
 
     private void setSubnetID(String ipAddress) {
-        String[] ip = ipAddress.split("\\.");
         StringBuilder subnetID = new StringBuilder();
 
         subnetID.append(ip[0]).append(".");
