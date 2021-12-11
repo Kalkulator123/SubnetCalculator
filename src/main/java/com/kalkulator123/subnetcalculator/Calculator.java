@@ -105,15 +105,9 @@ public class Calculator {
         String[] ip = ipAddress.split("\\.");
 
         if(!(Integer.parseInt(ip[0]) >= range.getKey() && Integer.parseInt(ip[0]) <= range.getValue())) {
-            return;
+            ip[0]=range.getKey().toString();
         }
-
-        for(int i = 1; i < ip.length; i++) {
-            if(!(Integer.parseInt(ip[i]) >= 0 && Integer.parseInt(ip[i]) <= 255)) {
-                return;
-            }
-        }
-
+        ipAddress = String.join(".",ip);
         setValue(CalculatorValues.IPAddress, ipAddress);
         setHexIPAddress(getValue(CalculatorValues.IPAddress));
         setSubnetID(getValue(CalculatorValues.IPAddress));
