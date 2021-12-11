@@ -7,6 +7,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 enum CalculatorValues {
     NetworkClass,
@@ -32,28 +34,50 @@ public class Calculator {
 
     public Calculator(Scene scene) {
         this.scene = scene;
-        setNetworkClass("C");
-        System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
+        String IPAdress = "123.123.123.123";
+        if(isValidIPAddress(IPAdress)){
+            setNetworkClass("C");
+            System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
 
-        setIPAddress("10.0.0.1");
-        System.out.println("IP: " + getValue(CalculatorValues.IPAddress));
-        System.out.println("FIRST OCTET RANGE: " + getValue(CalculatorValues.FirstOctetRange));
+            setIPAddress(IPAdress);
+            System.out.println("IP: " + getValue(CalculatorValues.IPAddress));
+            System.out.println("FIRST OCTET RANGE: " + getValue(CalculatorValues.FirstOctetRange));
 
-        System.out.println("HEX IP: " + getValue(CalculatorValues.HexIPAddress));
-        System.out.println("SUBNET ID: " + getValue(CalculatorValues.SubnetID));
-        setSubnetByIndex(6);
-        System.out.println("SUBNET MASK: " + getValue(CalculatorValues.SubnetMask));
-        System.out.println("WILD CARD: " + getValue(CalculatorValues.WildCardMask));
+            System.out.println("HEX IP: " + getValue(CalculatorValues.HexIPAddress));
+            System.out.println("SUBNET ID: " + getValue(CalculatorValues.SubnetID));
+            setSubnetByIndex(6);
+            System.out.println("SUBNET MASK: " + getValue(CalculatorValues.SubnetMask));
+            System.out.println("WILD CARD: " + getValue(CalculatorValues.WildCardMask));
 
-        System.out.println("SUBNET BITS: " + getValue(CalculatorValues.SubnetBits));
-        System.out.println("MASK BITS: " + getValue(CalculatorValues.MaskBits));
-        System.out.println("MAXIMUM SUBNETS: " + getValue(CalculatorValues.MaximumSubnets));
-        System.out.println("HOSTS PER SUBNET: " + getValue(CalculatorValues.HostsPerSubnet));
-        System.out.println("SUBNET BITMAP: " + getValue(CalculatorValues.SubnetBitmap));
-        System.out.println("BROADCAST ADDRESS: " + getValue(CalculatorValues.BroadcastAddress));
-        System.out.println("HOST ADDRESS RANGE: " + getValue(CalculatorValues.HostAddressRange));
+            System.out.println("SUBNET BITS: " + getValue(CalculatorValues.SubnetBits));
+            System.out.println("MASK BITS: " + getValue(CalculatorValues.MaskBits));
+            System.out.println("MAXIMUM SUBNETS: " + getValue(CalculatorValues.MaximumSubnets));
+            System.out.println("HOSTS PER SUBNET: " + getValue(CalculatorValues.HostsPerSubnet));
+            System.out.println("SUBNET BITMAP: " + getValue(CalculatorValues.SubnetBitmap));
+            System.out.println("BROADCAST ADDRESS: " + getValue(CalculatorValues.BroadcastAddress));
+            System.out.println("HOST ADDRESS RANGE: " + getValue(CalculatorValues.HostAddressRange));
+
+        }else
+            System.out.println("ERROR BAD IP ADRESS");
+
     }
-
+    public static boolean isValidIPAddress(String ip)
+    {
+        String zeroTo255
+                = "(\\d{1,2}|(0|1)\\"
+                + "d{2}|2[0-4]\\d|25[0-5])";
+        String regex
+                = zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255;
+        Pattern p = Pattern.compile(regex);
+        if (ip == null) {
+            return false;
+        }
+        Matcher m = p.matcher(ip);
+        return m.matches();
+    }
     public void setNetworkClass(String className) {
         switch (className) {
             case "B" -> {
