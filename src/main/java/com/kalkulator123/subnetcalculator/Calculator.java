@@ -33,6 +33,7 @@ public class Calculator {
             new EnumMap<>(CalculatorValues.class);
     private String[] ip;
     public Calculator(Scene scene) {
+
         this.scene = scene;
         String IPAdress = "123.123.123.123";
         //setIPAddress(IPAdress); MUSI SIĘ WYKONAĆ PRZED INNYMI FUNKCJAMI CO LICZĄ BO TAM SIĘ POPRAWIA BY BYŁ ZGODNY Z CLASSĄ
@@ -41,7 +42,7 @@ public class Calculator {
             setNetworkClass("C");
             System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
 
-            setIPAddress(IPAdress);
+            setIPAddress();
             System.out.println("IP: " + getValue(CalculatorValues.IPAddress));
             System.out.println("FIRST OCTET RANGE: " + getValue(CalculatorValues.FirstOctetRange));
 
@@ -85,30 +86,29 @@ public class Calculator {
             case "B" -> {
                 setValue(CalculatorValues.NetworkClass, className);
                 setValue(CalculatorValues.FirstOctetRange, "128-191");
-                setIPAddress("172.16.0.1");
+                setIPAddress();
             }
             case "C" -> {
                 setValue(CalculatorValues.NetworkClass, className);
                 setValue(CalculatorValues.FirstOctetRange, "192-223");
-                setIPAddress("192.168.0.1");
+                setIPAddress();
             }
             case "A" -> {
                 setValue(CalculatorValues.NetworkClass, className);
                 setValue(CalculatorValues.FirstOctetRange, "1-126");
-                setIPAddress("10.0.0.1");
+                setIPAddress();
             }
         }
     }
 
-    public void setIPAddress(String ipAddress) {
+    public void setIPAddress() {
         String[] octet = getValue(CalculatorValues.FirstOctetRange).split("-");
         Pair<Integer, Integer> range = new Pair<>(Integer.parseInt(octet[0]), Integer.parseInt(octet[1]));
-
-
         if(!(Integer.parseInt(ip[0]) >= range.getKey() && Integer.parseInt(ip[0]) <= range.getValue())) {
             ip[0]=range.getKey().toString();
         }
-        ipAddress = String.join(".",ip);
+
+        String ipAddress = String.join(".", ip);
         setValue(CalculatorValues.IPAddress, ipAddress);
         setHexIPAddress(getValue(CalculatorValues.IPAddress));
         setSubnetID(getValue(CalculatorValues.IPAddress));
