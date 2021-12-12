@@ -32,7 +32,8 @@ public class Calculator {
     private final EnumMap<CalculatorValues, String> valueMap =
             new EnumMap<>(CalculatorValues.class);
 
-
+    public boolean ended = false;
+    public int id;
     private String[] ip;
     public Calculator(Scene scene, String networkClass, String ipAdress, int subnetByIndex) {
         this.scene = scene;
@@ -129,6 +130,7 @@ public class Calculator {
     }
 
     public void setSubnetByIndex(int index) {
+        id = index;
         setValue(CalculatorValues.SubnetMask, getSubnetMaskList().get(index));
         setValue(CalculatorValues.SubnetBits, getSubnetBitsList().get(index));
         setValue(CalculatorValues.MaskBits, getMaskBitsList().get(index));
