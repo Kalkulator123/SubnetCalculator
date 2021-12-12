@@ -32,36 +32,15 @@ public class Calculator {
     private final EnumMap<CalculatorValues, String> valueMap =
             new EnumMap<>(CalculatorValues.class);
 
-    public Calculator(Scene scene, String networkClass, String ipAdress, int subnetByIndex) {
+
     private String[] ip;
-    public Calculator(Scene scene) {
-
+    public Calculator(Scene scene, String networkClass, String ipAdress, int subnetByIndex) {
         this.scene = scene;
-        setNetworkClass(networkClass);
-        System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
-        if(isValidIPAddress(IPAdress)){
-            ip = IPAdress.split("\\.");
-            setNetworkClass("C");
-            System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
-
-        setIPAddress();
-        System.out.println("IP: " + getValue(CalculatorValues.IPAddress));
-        System.out.println("FIRST OCTET RANGE: " + getValue(CalculatorValues.FirstOctetRange));
-
-        System.out.println("HEX IP: " + getValue(CalculatorValues.HexIPAddress));
-        System.out.println("SUBNET ID: " + getValue(CalculatorValues.SubnetID));
-        setSubnetByIndex(subnetByIndex);
-        System.out.println("SUBNET MASK: " + getValue(CalculatorValues.SubnetMask));
-        System.out.println("WILD CARD: " + getValue(CalculatorValues.WildCardMask));
-
-            System.out.println("SUBNET BITS: " + getValue(CalculatorValues.SubnetBits));
-            System.out.println("MASK BITS: " + getValue(CalculatorValues.MaskBits));
-            System.out.println("MAXIMUM SUBNETS: " + getValue(CalculatorValues.MaximumSubnets));
-            System.out.println("HOSTS PER SUBNET: " + getValue(CalculatorValues.HostsPerSubnet));
-            System.out.println("SUBNET BITMAP: " + getValue(CalculatorValues.SubnetBitmap));
-            System.out.println("BROADCAST ADDRESS: " + getValue(CalculatorValues.BroadcastAddress));
-            System.out.println("HOST ADDRESS RANGE: " + getValue(CalculatorValues.HostAddressRange));
-
+        if(isValidIPAddress(ipAdress)){
+            ip = ipAdress.split("\\.");
+            setNetworkClass(networkClass);
+            setIPAddress();
+            setSubnetByIndex(subnetByIndex);
         }else
             System.out.println("ERROR BAD IP ADRESS");
 

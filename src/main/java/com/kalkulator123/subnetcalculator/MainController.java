@@ -56,24 +56,18 @@ public class MainController {
         Calculator calculator = new Calculator(scene, "C", "192.168.0.1", 0);
         SubnetMask.setValue("255.255.255.0");
         setValues(calculator);
-        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                Calculator calculator = new Calculator(scene,
-                        ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
-                        IPAddress.getText(), SubnetMask.getSelectionModel().getSelectedIndex());
-                setValues(calculator);
-            }
+        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            Calculator calculator12 = new Calculator(scene,
+                    ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
+                    IPAddress.getText(), SubnetMask.getSelectionModel().getSelectedIndex());
+            setValues(calculator12);
         });
-        SubmitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println(SubnetMask.getSelectionModel().getSelectedIndex());
-                Calculator calculator = new Calculator(scene,
-                        ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
-                        IPAddress.getText(), SubnetMask.getSelectionModel().getSelectedIndex());
-                setValues(calculator);
-            }
+        SubmitButton.setOnAction(event -> {
+            System.out.println(SubnetMask.getSelectionModel().getSelectedIndex());
+            Calculator calculator1 = new Calculator(scene,
+                    ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
+                    IPAddress.getText(), SubnetMask.getSelectionModel().getSelectedIndex());
+            setValues(calculator1);
         });
     }
 
