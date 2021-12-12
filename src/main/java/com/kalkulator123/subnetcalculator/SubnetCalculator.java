@@ -26,6 +26,5 @@ public class SubnetCalculator extends Application {
 
     public static void main(String[] args) {
         launch();
-        Calculator calc = new Calculator(scene);
     }
 }

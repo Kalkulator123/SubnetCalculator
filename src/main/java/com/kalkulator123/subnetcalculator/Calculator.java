@@ -31,26 +31,28 @@ public class Calculator {
     private Scene scene;
     private final EnumMap<CalculatorValues, String> valueMap =
             new EnumMap<>(CalculatorValues.class);
+
+    public Calculator(Scene scene, String networkClass, String ipAdress, int subnetByIndex) {
     private String[] ip;
     public Calculator(Scene scene) {
 
         this.scene = scene;
-        String IPAdress = "123.123.123.123";
-        //setIPAddress(IPAdress); MUSI SIĘ WYKONAĆ PRZED INNYMI FUNKCJAMI CO LICZĄ BO TAM SIĘ POPRAWIA BY BYŁ ZGODNY Z CLASSĄ
+        setNetworkClass(networkClass);
+        System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
         if(isValidIPAddress(IPAdress)){
             ip = IPAdress.split("\\.");
             setNetworkClass("C");
             System.out.println("CLASS: " + getValue(CalculatorValues.NetworkClass));
 
-            setIPAddress();
-            System.out.println("IP: " + getValue(CalculatorValues.IPAddress));
-            System.out.println("FIRST OCTET RANGE: " + getValue(CalculatorValues.FirstOctetRange));
+        setIPAddress();
+        System.out.println("IP: " + getValue(CalculatorValues.IPAddress));
+        System.out.println("FIRST OCTET RANGE: " + getValue(CalculatorValues.FirstOctetRange));
 
-            System.out.println("HEX IP: " + getValue(CalculatorValues.HexIPAddress));
-            System.out.println("SUBNET ID: " + getValue(CalculatorValues.SubnetID));
-            setSubnetByIndex(6);
-            System.out.println("SUBNET MASK: " + getValue(CalculatorValues.SubnetMask));
-            System.out.println("WILD CARD: " + getValue(CalculatorValues.WildCardMask));
+        System.out.println("HEX IP: " + getValue(CalculatorValues.HexIPAddress));
+        System.out.println("SUBNET ID: " + getValue(CalculatorValues.SubnetID));
+        setSubnetByIndex(subnetByIndex);
+        System.out.println("SUBNET MASK: " + getValue(CalculatorValues.SubnetMask));
+        System.out.println("WILD CARD: " + getValue(CalculatorValues.WildCardMask));
 
             System.out.println("SUBNET BITS: " + getValue(CalculatorValues.SubnetBits));
             System.out.println("MASK BITS: " + getValue(CalculatorValues.MaskBits));
@@ -168,6 +170,7 @@ public class Calculator {
             case "C" -> 3;
             default -> 0;
         };
+
         for(int i = 0; i < bitArray.length; i++) {
             for(int j = 0; j < 8; j++) {
                 bitArray[i][j] = i < closeOn;
