@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -289,6 +290,9 @@ public class Calculator {
     }
 
     private void setBroadcastAddress() {
+        setWildcardMask(getValue(CalculatorValues.SubnetMask));
+        String[] maskW = getValue(CalculatorValues.WildCardMask).split("\\.");
+
         String[] ipB = getValue(CalculatorValues.SubnetID).split("\\.");
         for(int i = 0; i < ipB.length; i++) {
             ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i]));
@@ -306,6 +310,9 @@ public class Calculator {
                     .replace('1', '0').replace('2', '1');
             BigInteger b2 = new BigInteger(maskB[i], 2);
             broadcastAddress[i] = String.valueOf(Integer.parseInt(String.valueOf(b1.or(b2))));
+            if(maskW[i].equals("255")) {
+                broadcastAddress[i] = "255";
+            }
         }
 
         setValue(CalculatorValues.BroadcastAddress, String.join(".", broadcastAddress));
