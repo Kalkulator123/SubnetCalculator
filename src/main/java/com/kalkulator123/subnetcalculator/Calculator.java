@@ -38,13 +38,19 @@ public class Calculator {
     public Calculator(Scene scene, String networkClass, String ipAdress, int subnetByIndex) {
         this.scene = scene;
         if(isValidIPAddress(ipAdress)){
-            ip = ipAdress.split("\\.");
-            setNetworkClass(networkClass);
-            setIPAddress();
-            setSubnetByIndex(subnetByIndex);
-        }else
-            System.out.println("ERROR BAD IP ADRESS");
+            startBlock(ipAdress, networkClass, subnetByIndex);
+        }else{
+            ipAdress = "192.168.1.1";
+            startBlock(ipAdress, networkClass, subnetByIndex);
+        }
 
+
+    }
+    public void startBlock(String ipAdress, String networkClass, int subnetByIndex){
+        ip = ipAdress.split("\\.");
+        setNetworkClass(networkClass);
+        setIPAddress();
+        setSubnetByIndex(subnetByIndex);
     }
     public static boolean isValidIPAddress(String ip)
     {
@@ -57,8 +63,9 @@ public class Calculator {
                 + zeroTo255 + "\\."
                 + zeroTo255;
         Pattern p = Pattern.compile(regex);
-        if (ip == null) {
+        if (ip == "") {
             return false;
+
         }
         Matcher m = p.matcher(ip);
         return m.matches();

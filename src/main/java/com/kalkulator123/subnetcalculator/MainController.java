@@ -106,7 +106,7 @@ public class MainController {
         MaximumSubnets.setValue(calculator.getValue(CalculatorValues.MaximumSubnets));
         HostsPerSubnet.setItems(FXCollections.observableList(calculator.getHostsPerSubnetList()));
         HostsPerSubnet.setValue(calculator.getValue(CalculatorValues.HostsPerSubnet));
-
+        IPAddress.setText(calculator.getValue(CalculatorValues.IPAddress));
         FirstOctetRange.setText(calculator.getValue(CalculatorValues.FirstOctetRange));
         HexIPAdress.setText(calculator.getValue(CalculatorValues.HexIPAddress));
         WildcardMask.setText(calculator.getValue(CalculatorValues.WildCardMask));
