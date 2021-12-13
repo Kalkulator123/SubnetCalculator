@@ -118,8 +118,8 @@ public class Calculator {
         setValue(CalculatorValues.MaximumSubnets, getMaximumSubnetsList().get(index));
         setValue(CalculatorValues.HostsPerSubnet, getHostsPerSubnetList().get(index));
         setSubnetBitmap();
-        setBroadcastAddress();
         setSubnetID();
+        setBroadcastAddress();
         setHostAddressRange();
         setWildcardMask(getValue(CalculatorValues.SubnetMask));
     }
@@ -289,7 +289,7 @@ public class Calculator {
     }
 
     private void setBroadcastAddress() {
-        String[] ipB = getValue(CalculatorValues.IPAddress).split("\\.");
+        String[] ipB = getValue(CalculatorValues.SubnetID).split("\\.");
         for(int i = 0; i < ipB.length; i++) {
             ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i]));
         }
