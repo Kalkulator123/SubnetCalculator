@@ -103,6 +103,7 @@ public class MainController {
         SubnetBits.setValue(calculator.getValue(CalculatorValues.SubnetBits));
         MaskBits.setItems(FXCollections.observableList(calculator.getMaskBitsList()));
         MaskBits.setValue(calculator.getValue(CalculatorValues.MaskBits));
+        SubnetID.setText(calculator.getValue(CalculatorValues.SubnetID));
         MaximumSubnets.setItems(FXCollections.observableList(calculator.getMaximumSubnetsList()));
         MaximumSubnets.setValue(calculator.getValue(CalculatorValues.MaximumSubnets));
         HostsPerSubnet.setItems(FXCollections.observableList(calculator.getHostsPerSubnetList()));
@@ -112,7 +113,6 @@ public class MainController {
         HexIPAdress.setText(calculator.getValue(CalculatorValues.HexIPAddress));
         WildcardMask.setText(calculator.getValue(CalculatorValues.WildCardMask));
         HostAdressRange.setText(calculator.getValue(CalculatorValues.HostAddressRange));
-        SubnetID.setText(calculator.getValue(CalculatorValues.SubnetID));
         BroadcastAdress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
         SubnetBitmap.setText(calculator.getValue(CalculatorValues.SubnetBitmap));
     }

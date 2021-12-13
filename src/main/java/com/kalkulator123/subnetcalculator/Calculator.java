@@ -95,7 +95,6 @@ public class Calculator {
         String ipAddress = String.join(".", ip);
         setValue(CalculatorValues.IPAddress, ipAddress);
         setHexIPAddress();
-        setSubnetID();
     }
 
     private void setHexIPAddress() {
@@ -111,26 +110,6 @@ public class Calculator {
         setValue(CalculatorValues.HexIPAddress, hexIP.toString().toUpperCase());
     }
 
-    private void setSubnetID() {
-        StringBuilder subnetID = new StringBuilder();
-
-        subnetID.append(ip[0]).append(".");
-        if (!getValue(CalculatorValues.NetworkClass).equals("A")) {
-            subnetID.append(ip[1]).append(".");
-        } else {
-            subnetID.append("0.");
-        }
-
-        if (getValue(CalculatorValues.NetworkClass).equals("C")) {
-            subnetID.append(ip[2]).append(".");
-        } else {
-            subnetID.append("0.");
-        }
-        subnetID.append("0");
-
-        setValue(CalculatorValues.SubnetID, subnetID.toString());
-    }
-
     public void setSubnetByIndex(int index) {
         id = index;
         setValue(CalculatorValues.SubnetMask, getSubnetMaskList().get(index));
@@ -140,8 +119,30 @@ public class Calculator {
         setValue(CalculatorValues.HostsPerSubnet, getHostsPerSubnetList().get(index));
         setSubnetBitmap();
         setBroadcastAddress();
+        setSubnetID();
         setHostAddressRange();
         setWildcardMask(getValue(CalculatorValues.SubnetMask));
+    }
+
+    private void setSubnetID() {
+        String[] ipB = getValue(CalculatorValues.IPAddress).split("\\.");
+        for(int i = 0; i < ipB.length; i++) {
+            ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i]));
+        }
+
+        String[] maskB = getValue(CalculatorValues.SubnetMask).split("\\.");
+        for(int i = 0; i < maskB.length; i++) {
+            maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i]));
+        }
+
+        String[] broadcastAddress = new String[4];
+        for(int i = 0; i < broadcastAddress.length; i++) {
+            BigInteger b1 = new BigInteger(ipB[i], 2);
+            BigInteger b2 = new BigInteger(maskB[i], 2);
+            broadcastAddress[i] = String.valueOf(Integer.parseInt(String.valueOf(b1.and(b2))));
+        }
+
+        setValue(CalculatorValues.SubnetID, String.join(".", broadcastAddress));
     }
 
     public List<String> getSubnetMaskList() {
