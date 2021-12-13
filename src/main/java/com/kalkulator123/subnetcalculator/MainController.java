@@ -98,6 +98,7 @@ public class MainController {
 
     private void setValues(Calculator calculator){
         SubnetMask.setItems(FXCollections.observableList(calculator.getSubnetMaskList()));
+        SubnetMask.setValue(calculator.getValue(CalculatorValues.SubnetMask));
         SubnetBits.setItems(FXCollections.observableList(calculator.getSubnetBitsList()));
         SubnetBits.setValue(calculator.getValue(CalculatorValues.SubnetBits));
         MaskBits.setItems(FXCollections.observableList(calculator.getMaskBitsList()));

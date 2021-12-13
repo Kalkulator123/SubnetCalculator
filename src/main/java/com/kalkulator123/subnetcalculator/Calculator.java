@@ -37,12 +37,10 @@ public class Calculator {
     private String[] ip;
     public Calculator(Scene scene, String networkClass, String ipAdress, int subnetByIndex) {
         this.scene = scene;
-        if(isValidIPAddress(ipAdress)){
-            startBlock(ipAdress, networkClass, subnetByIndex);
-        }else{
+        if (!isValidIPAddress(ipAdress)) {
             ipAdress = "192.168.1.1";
-            startBlock(ipAdress, networkClass, subnetByIndex);
         }
+        startBlock(ipAdress, networkClass, subnetByIndex);
 
 
     }
@@ -75,17 +73,14 @@ public class Calculator {
             case "B" -> {
                 setValue(CalculatorValues.NetworkClass, className);
                 setValue(CalculatorValues.FirstOctetRange, "128-191");
-                setIPAddress();
             }
             case "C" -> {
                 setValue(CalculatorValues.NetworkClass, className);
                 setValue(CalculatorValues.FirstOctetRange, "192-223");
-                setIPAddress();
             }
             case "A" -> {
                 setValue(CalculatorValues.NetworkClass, className);
                 setValue(CalculatorValues.FirstOctetRange, "1-126");
-                setIPAddress();
             }
         }
     }
