@@ -28,16 +28,17 @@ enum CalculatorValues {
 }
 
 public class Calculator {
-    private final EnumMap<CalculatorValues, String> valueMap =
-            new EnumMap<>(CalculatorValues.class);
+    private final EnumMap <CalculatorValues, String> valueMap =
+            new EnumMap <>(CalculatorValues.class);
 
 
     private String[] ip;
-    public Calculator(String networkClass, String ipAddress, int subnetByIndex) {
-        setIPAddress(networkClass, ipAddress, subnetByIndex);
+
+    public Calculator(String networkClass , String ipAddress , int subnetByIndex) {
+        setIPAddress(networkClass , ipAddress , subnetByIndex);
     }
-    public static boolean isValidIPAddress(String ip)
-    {
+
+    public static boolean isValidIPAddress(String ip) {
         String zeroTo255
                 = "(\\d{1,2}|([01])\\"
                 + "d{2}|2[0-4]\\d|25[0-5])";
@@ -54,36 +55,37 @@ public class Calculator {
         Matcher m = p.matcher(ip);
         return m.matches();
     }
+
     public void setNetworkClass(String className) {
         switch (className) {
             case "B" -> {
-                setValue(CalculatorValues.NetworkClass, className);
-                setValue(CalculatorValues.FirstOctetRange, "128-191");
+                setValue(CalculatorValues.NetworkClass , className);
+                setValue(CalculatorValues.FirstOctetRange , "128-191");
             }
             case "C" -> {
-                setValue(CalculatorValues.NetworkClass, className);
-                setValue(CalculatorValues.FirstOctetRange, "192-223");
+                setValue(CalculatorValues.NetworkClass , className);
+                setValue(CalculatorValues.FirstOctetRange , "192-223");
             }
             case "A" -> {
-                setValue(CalculatorValues.NetworkClass, className);
-                setValue(CalculatorValues.FirstOctetRange, "1-126");
+                setValue(CalculatorValues.NetworkClass , className);
+                setValue(CalculatorValues.FirstOctetRange , "1-126");
             }
         }
     }
 
-    public void setIPAddress(String networkClass, String ipAdress, int subnetByIndex) {
+    public void setIPAddress(String networkClass , String ipAdress , int subnetByIndex) {
         if (!isValidIPAddress(ipAdress)) {
             ipAdress = "192.168.1.1";
         }
         ip = ipAdress.split("\\.");
         setNetworkClass(networkClass);
         String[] octet = getValue(CalculatorValues.FirstOctetRange).split("-");
-        Pair<Integer, Integer> range = new Pair<>(Integer.parseInt(octet[0]), Integer.parseInt(octet[1]));
-        if(!(Integer.parseInt(ip[0]) >= range.getKey() && Integer.parseInt(ip[0]) <= range.getValue())) {
-            ip[0]=range.getKey().toString();
+        Pair <Integer, Integer> range = new Pair <>(Integer.parseInt(octet[0]) , Integer.parseInt(octet[1]));
+        if (!(Integer.parseInt(ip[0]) >= range.getKey() && Integer.parseInt(ip[0]) <= range.getValue())) {
+            ip[0] = range.getKey().toString();
         }
-        String ipAddress = String.join(".", ip);
-        setValue(CalculatorValues.IPAddress, ipAddress);
+        String ipAddress = String.join("." , ip);
+        setValue(CalculatorValues.IPAddress , ipAddress);
         setHexIPAddress();
         setSubnetByIndex(subnetByIndex);
     }
@@ -98,15 +100,15 @@ public class Calculator {
         }
         hexIP.deleteCharAt(hexIP.lastIndexOf("."));
 
-        setValue(CalculatorValues.HexIPAddress, hexIP.toString().toUpperCase());
+        setValue(CalculatorValues.HexIPAddress , hexIP.toString().toUpperCase());
     }
 
     public void setSubnetByIndex(int index) {
-        setValue(CalculatorValues.SubnetMask, getSubnetMaskList().get(index));
-        setValue(CalculatorValues.SubnetBits, getSubnetBitsList().get(index));
-        setValue(CalculatorValues.MaskBits, getMaskBitsList().get(index));
-        setValue(CalculatorValues.MaximumSubnets, getMaximumSubnetsList().get(index));
-        setValue(CalculatorValues.HostsPerSubnet, getHostsPerSubnetList().get(index));
+        setValue(CalculatorValues.SubnetMask , getSubnetMaskList().get(index));
+        setValue(CalculatorValues.SubnetBits , getSubnetBitsList().get(index));
+        setValue(CalculatorValues.MaskBits , getMaskBitsList().get(index));
+        setValue(CalculatorValues.MaximumSubnets , getMaximumSubnetsList().get(index));
+        setValue(CalculatorValues.HostsPerSubnet , getHostsPerSubnetList().get(index));
         setSubnetBitmap();
         setSubnetID();
         setBroadcastAddress();
@@ -116,23 +118,23 @@ public class Calculator {
 
     private void setSubnetID() {
         String[] ipB = getValue(CalculatorValues.IPAddress).split("\\.");
-        IntStream.range(0, ipB.length).forEach(i -> ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i])));
+        IntStream.range(0 , ipB.length).forEach(i -> ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i])));
 
         String[] maskB = getValue(CalculatorValues.SubnetMask).split("\\.");
-        IntStream.range(0, maskB.length).forEach(i -> maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i])));
+        IntStream.range(0 , maskB.length).forEach(i -> maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i])));
 
         String[] broadcastAddress = new String[4];
-        IntStream.range(0, broadcastAddress.length).forEach(i -> {
-            BigInteger b1 = new BigInteger(ipB[i], 2);
-            BigInteger b2 = new BigInteger(maskB[i], 2);
+        IntStream.range(0 , broadcastAddress.length).forEach(i -> {
+            BigInteger b1 = new BigInteger(ipB[i] , 2);
+            BigInteger b2 = new BigInteger(maskB[i] , 2);
             broadcastAddress[i] = String.valueOf(Integer.parseInt(String.valueOf(b1.and(b2))));
         });
 
-        setValue(CalculatorValues.SubnetID, String.join(".", broadcastAddress));
+        setValue(CalculatorValues.SubnetID , String.join("." , broadcastAddress));
     }
 
-    public List<String> getSubnetMaskList() {
-        List<String> subnetMasksList = new ArrayList<>();
+    public List <String> getSubnetMaskList() {
+        List <String> subnetMasksList = new ArrayList <>();
         boolean[][] bitArray = new boolean[4][8];
         int closeOn = switch (getValue(CalculatorValues.NetworkClass)) {
             case "A" -> 1;
@@ -141,16 +143,16 @@ public class Calculator {
             default -> 0;
         };
 
-        for(int i = 0; i < bitArray.length; i++) {
-            for(int j = 0; j < 8; j++) {
+        for (int i = 0 ; i < bitArray.length ; i++) {
+            for (int j = 0 ; j < 8 ; j++) {
                 bitArray[i][j] = i < closeOn;
             }
         }
 
-        for (int i = closeOn; i < bitArray.length; i++) {
-            for(int j = 0; j < bitArray[i].length; j++) {
+        for (int i = closeOn ; i < bitArray.length ; i++) {
+            for (int j = 0 ; j < bitArray[i].length ; j++) {
                 subnetMasksList.add(toSubnetMask(bitArray));
-                if(i == bitArray.length - 1 && ((j == bitArray[i].length - 2 || j == bitArray[i].length - 1))) {
+                if (i == bitArray.length - 1 && ((j == bitArray[i].length - 2 || j == bitArray[i].length - 1))) {
                     break;
                 }
                 bitArray[i][j] = true;
@@ -166,18 +168,17 @@ public class Calculator {
             StringBuilder wildcardMask = new StringBuilder();
             wildcardMask.append("0.");
 
-            IntStream.range(1, subnetMaskArray.length).forEach(i -> wildcardMask.append(255 - Integer.parseInt(subnetMaskArray[i])).append("."));
+            IntStream.range(1 , subnetMaskArray.length).forEach(i -> wildcardMask.append(255 - Integer.parseInt(subnetMaskArray[i])).append("."));
             wildcardMask.deleteCharAt(wildcardMask.length() - 1);
 
-            setValue(CalculatorValues.WildCardMask, wildcardMask.toString());
-        }
-        catch (Exception e) {
-            setValue(CalculatorValues.WildCardMask, "NULL");
+            setValue(CalculatorValues.WildCardMask , wildcardMask.toString());
+        } catch (Exception e) {
+            setValue(CalculatorValues.WildCardMask , "NULL");
         }
     }
 
-    public int subnetClass(){
-        int value=0;
+    public int subnetClass() {
+        int value = 0;
         switch (getValue(CalculatorValues.NetworkClass)) {
             case "A" -> value = 8;
             case "B" -> value = 16;
@@ -185,49 +186,53 @@ public class Calculator {
         }
         return value;
     }
-    public List<String> getSubnetBitsList() {
-        List<String> subnetBitsList = new ArrayList<>();
-        int subnetMaskLength = 8*4;
+
+    public List <String> getSubnetBitsList() {
+        List <String> subnetBitsList = new ArrayList <>();
+        int subnetMaskLength = 8 * 4;
         int subnetBits = 0;
-        for (int i = subnetClass() - 1; i < subnetMaskLength - 2; i++) {
+        for (int i = subnetClass() - 1 ; i < subnetMaskLength - 2 ; i++) {
             subnetBitsList.add(String.valueOf(subnetBits++));
         }
 
         return subnetBitsList;
     }
-    public List<String> getMaskBitsList() {
-        List<String> subnetBitsList = new ArrayList<>();
 
-        int subnetMaskLength = 8*4;
+    public List <String> getMaskBitsList() {
+        List <String> subnetBitsList = new ArrayList <>();
+
+        int subnetMaskLength = 8 * 4;
         int subnetBits = subnetClass();
 
-        for (int i = subnetBits; i <= subnetMaskLength - 2; i++) {
+        for (int i = subnetBits ; i <= subnetMaskLength - 2 ; i++) {
             subnetBitsList.add(String.valueOf(subnetBits++));
         }
 
         return subnetBitsList;
     }
 
-    public List<String> getMaximumSubnetsList() {
-        List<String> subnetBitsList = getSubnetBitsList();
-        List<String> maximumSubnetsList = new ArrayList<>();
+    public List <String> getMaximumSubnetsList() {
+        List <String> subnetBitsList = getSubnetBitsList();
+        List <String> maximumSubnetsList = new ArrayList <>();
         for (String s : subnetBitsList) {
             StringBuilder sb = new StringBuilder();
-            sb.append(Math.pow(2, Integer.parseInt(s)))
+            sb.append(Math.pow(2 , Integer.parseInt(s)))
                     .deleteCharAt(sb.length() - 1)
                     .deleteCharAt(sb.length() - 1);
             maximumSubnetsList.add(sb.toString());
         }
         return maximumSubnetsList;
     }
-    public List<String> getHostsPerSubnetList() {
-        List<String> subnetBitsList = getMaskBitsList();
-        List<String> hostsPerSubnetList = new ArrayList<>();
+
+    public List <String> getHostsPerSubnetList() {
+        List <String> subnetBitsList = getMaskBitsList();
+        List <String> hostsPerSubnetList = new ArrayList <>();
+
         subnetBitsList.forEach(s -> {
             StringBuilder sb = new StringBuilder();
-            sb.append(Math.pow(2, (32 - Integer.parseInt(s))) - 2)
-                    .deleteCharAt(sb.length() - 1)
-                    .deleteCharAt(sb.length() - 1);
+            Double x = Math.pow(2 , (32 - Integer.parseInt(s))) - 2;
+            if (x == -1) x = 1D;
+            sb.append(x.longValue());
             hostsPerSubnetList.add(sb.toString());
         });
         return hostsPerSubnetList;
@@ -253,23 +258,23 @@ public class Calculator {
             }
         }
 
-        for(int i = 0; i < 4; i++) {
-            if(subnetBitmap[i] == null) {
+        for (int i = 0 ; i < 4 ; i++) {
+            if (subnetBitmap[i] == null) {
                 subnetBitmap[i] = "";
             }
-            for (int j = subnetBitmap[i].length(); j < 8; j++) {
-                if(maskBits-- > 0) {
+            for (int j = subnetBitmap[i].length() ; j < 8 ; j++) {
+                if (maskBits-- > 0) {
                     subnetBitmap[i] += "n";
                     continue;
                 }
-                if(subnetBits-- > 0) {
+                if (subnetBits-- > 0) {
                     subnetBitmap[i] += "s";
                     continue;
                 }
                 subnetBitmap[i] += "h";
             }
         }
-        setValue(CalculatorValues.SubnetBitmap, String.join(".", subnetBitmap));
+        setValue(CalculatorValues.SubnetBitmap , String.join("." , subnetBitmap));
     }
 
     private void setBroadcastAddress() {
@@ -277,24 +282,24 @@ public class Calculator {
         String[] maskW = getValue(CalculatorValues.WildCardMask).split("\\.");
 
         String[] ipB = getValue(CalculatorValues.SubnetID).split("\\.");
-        IntStream.range(0, ipB.length).forEach(i -> ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i])));
+        IntStream.range(0 , ipB.length).forEach(i -> ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i])));
 
         String[] maskB = getValue(CalculatorValues.SubnetMask).split("\\.");
-        IntStream.range(0, maskB.length).forEach(i -> maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i])));
+        IntStream.range(0 , maskB.length).forEach(i -> maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i])));
 
         String[] broadcastAddress = new String[4];
-        for(int i = 0; i < broadcastAddress.length; i++) {
-            BigInteger b1 = new BigInteger(ipB[i], 2);
-            maskB[i] = maskB[i].replace('0', '2')
-                    .replace('1', '0').replace('2', '1');
-            BigInteger b2 = new BigInteger(maskB[i], 2);
+        for (int i = 0 ; i < broadcastAddress.length ; i++) {
+            BigInteger b1 = new BigInteger(ipB[i] , 2);
+            maskB[i] = maskB[i].replace('0' , '2')
+                    .replace('1' , '0').replace('2' , '1');
+            BigInteger b2 = new BigInteger(maskB[i] , 2);
             broadcastAddress[i] = String.valueOf(Integer.parseInt(String.valueOf(b1.or(b2))));
-            if(maskW[i].equals("255")) {
+            if (maskW[i].equals("255")) {
                 broadcastAddress[i] = "255";
             }
         }
 
-        setValue(CalculatorValues.BroadcastAddress, String.join(".", broadcastAddress));
+        setValue(CalculatorValues.BroadcastAddress , String.join("." , broadcastAddress));
     }
 
     private void setHostAddressRange() {
@@ -303,8 +308,8 @@ public class Calculator {
         sID[sID.length - 1] = String.valueOf(Integer.parseInt(sID[sID.length - 1]) + 1);
         bAdd[bAdd.length - 1] = String.valueOf(Integer.parseInt(bAdd[bAdd.length - 1]) - 1);
 
-        String hostAddressRange = String.join(".", sID) + "-" + String.join(".", bAdd);
-        setValue(CalculatorValues.HostAddressRange, hostAddressRange);
+        String hostAddressRange = String.join("." , sID) + "-" + String.join("." , bAdd);
+        setValue(CalculatorValues.HostAddressRange , hostAddressRange);
     }
 
     private String toSubnetMask(boolean[][] bitArray) {
@@ -321,17 +326,42 @@ public class Calculator {
         return subnetMask.toString();
     }
 
-    private void setValue(CalculatorValues calculatorValues, String value) {
-        valueMap.put(calculatorValues, value);
+    private void setValue(CalculatorValues calculatorValues , String value) {
+        valueMap.put(calculatorValues , value);
     }
 
     public String getValue(CalculatorValues calculatorValues) {
-        if(valueMap.get(calculatorValues) == null) {
+        if (valueMap.get(calculatorValues) == null) {
             setSubnetByIndex(0);
-            if(valueMap.get(calculatorValues) == null) {
+            if (valueMap.get(calculatorValues) == null) {
                 return "";
             }
         }
         return valueMap.get(calculatorValues);
     }
 }
+/*                                    .-+*#%@@@@@@%#*+-:
+                                .=#@@@@@@@@@@@@@@@@@@@@#=.
+                              =%@@@@@@@@@%#****#%@@@@@@@@@%=.
+                           .+@@@@@@@#=:            :=#@@@@@@@*.
+                          =@@@@@@#-                    -*@@@@@@=
+                         #@@@@@*.     .-+#%@@@@@%#+-     .+@@@@@%.
+                       .%@@@@%:     -#@@@@@@@@@@@@@@@#-    :%@@@@@.
+                       %@@@@#     :%@@@@@@%#***#%@@@@@@%:    #@@@@%
+                      *@@@@%     +@@@@@%=.       .=%@@@@@=    %@@@@#
+                     .@@@@@:    =@@@@@=             =%%%%%-   :@@@@@:
+                     =@@@@%     @@@@@=  DJMixu                 %@@@@+
+                     +@@@@*    :@@@@@   Pabelito04             *@@@@*
+                     +@@@@#    .@@@@@.  NBright                *@@@@*
+                     -@@@@@     %@@@@*               :::::.    @@@@@=
+                      @@@@@=    .@@@@@#.           .#@@@@@.   =@@@@@
+                      -@@@@@:    :%@@@@@#=:     :=#@@@@@%:   .@@@@@=D
+                       *@@@@@:     +@@@@@@@@@@@@@@@@@@@+    :@@@@@#
+                        *@@@@@+      =#@@@@@@@@@@@@@#=     +@@@@@*
+                         =@@@@@@+       :-+*****+-:      =@@@@@@=
+                          .#@@@@@@*-                  -*@@@@@@#.
+                            :#@@@@@@@#+=:.      .:-+#@@@@@@@#-
+                              .+%@@@@@@@@@@@@@@@@@@@@@@@@%+.
+                                 .-*%@@@@@@@@@@@@@@@@%*=.
+
+ */
