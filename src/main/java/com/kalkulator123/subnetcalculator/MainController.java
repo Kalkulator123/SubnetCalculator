@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 
 public class MainController {
     Scene scene = SubnetCalculator.scene;
+    int index;
     @FXML
     private TextField IPAddress;
     @FXML
@@ -59,6 +60,7 @@ public class MainController {
         setValues(calculator);
         calculator.ended = true;
         group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            changeSubnet(0);
             calculator.ended = false;
             calculator = new Calculator(scene,
                     ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
@@ -67,24 +69,20 @@ public class MainController {
             calculator.ended = true;
         });
         SubnetMask.valueProperty().addListener((observableValue, o, t1) -> {
-            if(calculator.ended)
-            calculator.setSubnetByIndex(SubnetMask.getSelectionModel().getSelectedIndex());
+            changeSubnet(SubnetMask.getSelectionModel().getSelectedIndex());
+
         });
         SubnetBits.valueProperty().addListener((observableValue, o, t1) -> {
-            if(calculator.ended)
-            calculator.setSubnetByIndex(SubnetBits.getSelectionModel().getSelectedIndex());
+            changeSubnet(SubnetBits.getSelectionModel().getSelectedIndex());
         });
         MaskBits.valueProperty().addListener((observableValue, o, t1) -> {
-            if(calculator.ended)
-            calculator.setSubnetByIndex(MaskBits.getSelectionModel().getSelectedIndex());
+            changeSubnet(MaskBits.getSelectionModel().getSelectedIndex());
         });
         MaximumSubnets.valueProperty().addListener((observableValue, o, t1) -> {
-            if(calculator.ended)
-            calculator.setSubnetByIndex(MaximumSubnets.getSelectionModel().getSelectedIndex());
+            changeSubnet(MaximumSubnets.getSelectionModel().getSelectedIndex());
         });
         HostsPerSubnet.valueProperty().addListener((observableValue, o, t1) -> {
-            if(calculator.ended)
-            calculator.setSubnetByIndex(HostsPerSubnet.getSelectionModel().getSelectedIndex());
+            changeSubnet(HostsPerSubnet.getSelectionModel().getSelectedIndex());
         });
         SubmitButton.setOnAction(event -> {
             calculator.ended = false;
@@ -94,6 +92,18 @@ public class MainController {
             setValues(calculator);
             calculator.ended = true;
         });
+    }
+
+    private void changeSubnet(int i) {
+        if(calculator.ended)
+            index = i;
+        calculator.setSubnetByIndex(index);
+        SubnetBits.getSelectionModel().select(index);
+        SubnetMask.getSelectionModel().select(index);
+        MaskBits.getSelectionModel().select(index);
+        MaximumSubnets.getSelectionModel().select(index);
+        HostsPerSubnet.getSelectionModel().select(index);
+
     }
 
     private void setValues(Calculator calculator){
