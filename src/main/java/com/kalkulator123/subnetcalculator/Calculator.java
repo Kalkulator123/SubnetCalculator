@@ -122,11 +122,11 @@ public class Calculator {
         IntStream.range(0, maskB.length).forEach(i -> maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i])));
 
         String[] broadcastAddress = new String[4];
-        for(int i = 0; i < broadcastAddress.length; i++) {
+        IntStream.range(0, broadcastAddress.length).forEach(i -> {
             BigInteger b1 = new BigInteger(ipB[i], 2);
             BigInteger b2 = new BigInteger(maskB[i], 2);
             broadcastAddress[i] = String.valueOf(Integer.parseInt(String.valueOf(b1.and(b2))));
-        }
+        });
 
         setValue(CalculatorValues.SubnetID, String.join(".", broadcastAddress));
     }
@@ -166,9 +166,7 @@ public class Calculator {
             StringBuilder wildcardMask = new StringBuilder();
             wildcardMask.append("0.");
 
-            for (int i = 1; i < subnetMaskArray.length; i++) {
-                wildcardMask.append(255 - Integer.parseInt(subnetMaskArray[i])).append(".");
-            }
+            IntStream.range(1, subnetMaskArray.length).forEach(i -> wildcardMask.append(255 - Integer.parseInt(subnetMaskArray[i])).append("."));
             wildcardMask.deleteCharAt(wildcardMask.length() - 1);
 
             setValue(CalculatorValues.WildCardMask, wildcardMask.toString());
@@ -225,13 +223,13 @@ public class Calculator {
     public List<String> getHostsPerSubnetList() {
         List<String> subnetBitsList = getMaskBitsList();
         List<String> hostsPerSubnetList = new ArrayList<>();
-        for (String s : subnetBitsList) {
+        subnetBitsList.forEach(s -> {
             StringBuilder sb = new StringBuilder();
             sb.append(Math.pow(2, (32 - Integer.parseInt(s))) - 2)
                     .deleteCharAt(sb.length() - 1)
                     .deleteCharAt(sb.length() - 1);
             hostsPerSubnetList.add(sb.toString());
-        }
+        });
         return hostsPerSubnetList;
     }
 
