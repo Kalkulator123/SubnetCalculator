@@ -92,6 +92,7 @@ public class MainController {
             setValues(calculator);
             calculator.ended = true;
         });
+
     }
 
     private void changeSubnet(int i) {
@@ -103,7 +104,11 @@ public class MainController {
         MaskBits.getSelectionModel().select(index);
         MaximumSubnets.getSelectionModel().select(index);
         HostsPerSubnet.getSelectionModel().select(index);
-
+        WildcardMask.setText(calculator.getValue(CalculatorValues.WildCardMask));
+        HostAdressRange.setText(calculator.getValue(CalculatorValues.HostAddressRange));
+        BroadcastAdress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
+        SubnetBitmap.setText(calculator.getValue(CalculatorValues.SubnetBitmap));
+        SubnetID.setText(calculator.getValue(CalculatorValues.SubnetID));
     }
 
     private void setValues(Calculator calculator){
