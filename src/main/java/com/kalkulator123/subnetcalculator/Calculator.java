@@ -227,7 +227,6 @@ public class Calculator {
     public List <String> getHostsPerSubnetList() {
         List <String> subnetBitsList = getMaskBitsList();
         List <String> hostsPerSubnetList = new ArrayList <>();
-
         subnetBitsList.forEach(s -> {
             StringBuilder sb = new StringBuilder();
             Double x = Math.pow(2 , (32 - Integer.parseInt(s))) - 2;
