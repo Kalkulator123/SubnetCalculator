@@ -33,13 +33,13 @@ public class Calculator {
 
 
     private String[] ip;
-    public Calculator(String networkClass, String ipAdress, int subnetByIndex) {
-        setIPAddress(networkClass, ipAdress, subnetByIndex);
+    public Calculator(String networkClass, String ipAddress, int subnetByIndex) {
+        setIPAddress(networkClass, ipAddress, subnetByIndex);
     }
     public static boolean isValidIPAddress(String ip)
     {
         String zeroTo255
-                = "(\\d{1,2}|(0|1)\\"
+                = "(\\d{1,2}|([01])\\"
                 + "d{2}|2[0-4]\\d|25[0-5])";
         String regex
                 = zeroTo255 + "\\."
@@ -47,7 +47,7 @@ public class Calculator {
                 + zeroTo255 + "\\."
                 + zeroTo255;
         Pattern p = Pattern.compile(regex);
-        if (ip == "") {
+        if (ip.equals("")) {
             return false;
 
         }
