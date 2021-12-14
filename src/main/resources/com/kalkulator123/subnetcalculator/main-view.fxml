@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -11,49 +10,131 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" hgap="10" minHeight="150" minWidth="300" prefHeight="578.0" prefWidth="466.0" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kalkulator123.subnetcalculator.MainController">
-   <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
-   <TextField fx:id="IPAddress" text="192.168.0.1" GridPane.rowIndex="3" />
-   <ComboBox fx:id="SubnetMask" prefWidth="150.0" GridPane.rowIndex="5" />
-   <ComboBox fx:id="SubnetBits" prefWidth="150.0" GridPane.rowIndex="7" />
-   <ComboBox fx:id="MaximumSubnets" prefWidth="150.0" GridPane.rowIndex="9" />
-   <TextField fx:id="FirstOctetRange" editable="false" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-   <TextField fx:id="HexIPAddress" editable="false" layoutX="264.0" layoutY="91.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-   <TextField fx:id="WildcardMask" editable="false" layoutX="264.0" layoutY="126.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-   <ComboBox fx:id="MaskBits" layoutX="104.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-   <ComboBox fx:id="HostsPerSubnet" layoutX="263.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-   <TextField fx:id="HostAddressRange" editable="false" layoutX="263.0" layoutY="161.0" style="-fx-background-color: lightgray;" GridPane.columnSpan="2" GridPane.rowIndex="11" />
-   <TextField fx:id="SubnetID" editable="false" layoutX="263.0" layoutY="143.0" style="-fx-background-color: lightgray;" GridPane.rowIndex="13" />
-   <TextField fx:id="BroadcastAddress" editable="false" layoutX="103.0" layoutY="266.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-   <TextField fx:id="SubnetBitmap" editable="false" layoutX="103.0" layoutY="231.0" style="-fx-background-color: lightgray;" GridPane.columnSpan="2" GridPane.rowIndex="15" />
-   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class" />
-   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Octet Range" GridPane.columnIndex="1" />
-   <Text layoutX="263.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address" GridPane.rowIndex="2" />
-   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hex IP Address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet Mask" GridPane.rowIndex="4" />
-   <Text layoutX="103.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wildcard Mask" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-   <Text layoutX="103.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet Bits" GridPane.rowIndex="6" />
-   <Text layoutX="103.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mask Bits" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-   <Text layoutX="63.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum Subnets" GridPane.rowIndex="8" />
-   <Text layoutX="63.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hosts per Subnet" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-   <Text layoutX="63.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host Address Range" GridPane.columnSpan="2" GridPane.rowIndex="10" />
-   <Text layoutX="63.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet ID" GridPane.rowIndex="12" />
-   <Text layoutX="63.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Broadcast Address" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-   <Text layoutX="63.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class" GridPane.columnSpan="2" GridPane.rowIndex="14" />
+<GridPane alignment="center" minHeight="150.0" minWidth="247.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kalkulator123.subnetcalculator.MainController">
+   <TextField fx:id="IPAddress" text="192.168.0.1" GridPane.rowIndex="3">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <ComboBox fx:id="SubnetMask" prefWidth="150.0" GridPane.rowIndex="5">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></ComboBox>
+   <ComboBox fx:id="SubnetBits" prefWidth="150.0" GridPane.rowIndex="7">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></ComboBox>
+   <ComboBox fx:id="MaximumSubnets" prefWidth="150.0" GridPane.rowIndex="9">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></ComboBox>
+   <TextField fx:id="FirstOctetRange" alignment="CENTER" editable="false" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <TextField fx:id="HexIPAddress" alignment="CENTER" editable="false" layoutX="264.0" layoutY="91.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <TextField fx:id="WildcardMask" alignment="CENTER" editable="false" layoutX="264.0" layoutY="126.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <ComboBox fx:id="MaskBits" layoutX="104.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></ComboBox>
+   <ComboBox fx:id="HostsPerSubnet" layoutX="263.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></ComboBox>
+   <TextField fx:id="HostAddressRange" alignment="CENTER" editable="false" layoutX="263.0" layoutY="161.0" style="-fx-background-color: lightgray;" GridPane.columnSpan="2" GridPane.rowIndex="11">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <TextField fx:id="SubnetID" alignment="CENTER" editable="false" layoutX="263.0" layoutY="143.0" style="-fx-background-color: lightgray;" GridPane.rowIndex="13">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <TextField fx:id="BroadcastAddress" alignment="CENTER" editable="false" layoutX="103.0" layoutY="266.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="13">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <TextField fx:id="SubnetBitmap" alignment="CENTER" editable="false" layoutX="103.0" layoutY="231.0" style="-fx-background-color: lightgray;" GridPane.columnSpan="2" GridPane.rowIndex="15">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Octet Range" GridPane.columnIndex="1">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="263.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address" GridPane.rowIndex="2">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hex IP Address" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet Mask" GridPane.rowIndex="4">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="103.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wildcard Mask" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="103.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet Bits" GridPane.rowIndex="6">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="103.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mask Bits" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="63.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum Subnets" GridPane.rowIndex="8">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="63.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hosts per Subnet" GridPane.columnIndex="1" GridPane.rowIndex="8">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="63.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host Address Range" GridPane.columnSpan="2" GridPane.rowIndex="10">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="63.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet ID" GridPane.rowIndex="12">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="63.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Broadcast Address" GridPane.columnIndex="1" GridPane.rowIndex="12">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="63.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class" GridPane.columnSpan="2" GridPane.rowIndex="14">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
    <Group fx:id="RadioButtonGroup" GridPane.rowIndex="1">
       <children>
          <RadioButton fx:id="ClassA" mnemonicParsing="false" snapToPixel="false" text="A" />
          <RadioButton fx:id="ClassB" layoutX="50.0" mnemonicParsing="false" text="B" />
          <RadioButton fx:id="ClassC" layoutX="100.0" mnemonicParsing="false" selected="true" text="C" />
       </children>
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin>
    </Group>
-   <Button fx:id="SubmitButton" mnemonicParsing="false" text="Button" GridPane.rowIndex="16" GridPane.rowSpan="2" />
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
       <ColumnConstraints />
       <ColumnConstraints />
    </columnConstraints>
@@ -78,11 +159,14 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
    </rowConstraints>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 
 </GridPane>

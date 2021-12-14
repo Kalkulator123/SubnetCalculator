@@ -13,8 +13,6 @@ public class MainController {
     private ComboBox SubnetMask, SubnetBits, MaximumSubnets, MaskBits, HostsPerSubnet;
     @FXML
     private RadioButton ClassA, ClassB, ClassC;
-    @FXML
-    private Button SubmitButton;
 
     Calculator calculator;
 
@@ -35,7 +33,6 @@ public class MainController {
         MaskBits.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(MaskBits.getSelectionModel().getSelectedIndex()));
         MaximumSubnets.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(MaximumSubnets.getSelectionModel().getSelectedIndex()));
         HostsPerSubnet.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(HostsPerSubnet.getSelectionModel().getSelectedIndex()));
-        SubmitButton.setOnAction(event -> calculate());
         IPAddress.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) calculate();
         });
