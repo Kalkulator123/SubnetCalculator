@@ -1,15 +1,14 @@
 package com.kalkulator123.subnetcalculator;
 
-import javafx.scene.Scene;
 import javafx.util.Pair;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 enum CalculatorValues {
     NetworkClass,
@@ -29,27 +28,13 @@ enum CalculatorValues {
 }
 
 public class Calculator {
-    private Scene scene;
     private final EnumMap<CalculatorValues, String> valueMap =
             new EnumMap<>(CalculatorValues.class);
 
-    public boolean ended = false;
-    public int id;
+
     private String[] ip;
-    public Calculator(Scene scene, String networkClass, String ipAdress, int subnetByIndex) {
-        this.scene = scene;
-        if (!isValidIPAddress(ipAdress)) {
-            ipAdress = "192.168.1.1";
-        }
-        startBlock(ipAdress, networkClass, subnetByIndex);
-
-
-    }
-    public void startBlock(String ipAdress, String networkClass, int subnetByIndex){
-        ip = ipAdress.split("\\.");
-        setNetworkClass(networkClass);
-        setIPAddress();
-        setSubnetByIndex(subnetByIndex);
+    public Calculator(String networkClass, String ipAdress, int subnetByIndex) {
+        setIPAddress(networkClass, ipAdress, subnetByIndex);
     }
     public static boolean isValidIPAddress(String ip)
     {
@@ -86,16 +71,21 @@ public class Calculator {
         }
     }
 
-    public void setIPAddress() {
+    public void setIPAddress(String networkClass, String ipAdress, int subnetByIndex) {
+        if (!isValidIPAddress(ipAdress)) {
+            ipAdress = "192.168.1.1";
+        }
+        ip = ipAdress.split("\\.");
+        setNetworkClass(networkClass);
         String[] octet = getValue(CalculatorValues.FirstOctetRange).split("-");
         Pair<Integer, Integer> range = new Pair<>(Integer.parseInt(octet[0]), Integer.parseInt(octet[1]));
         if(!(Integer.parseInt(ip[0]) >= range.getKey() && Integer.parseInt(ip[0]) <= range.getValue())) {
             ip[0]=range.getKey().toString();
         }
-
         String ipAddress = String.join(".", ip);
         setValue(CalculatorValues.IPAddress, ipAddress);
         setHexIPAddress();
+        setSubnetByIndex(subnetByIndex);
     }
 
     private void setHexIPAddress() {
@@ -112,7 +102,6 @@ public class Calculator {
     }
 
     public void setSubnetByIndex(int index) {
-        id = index;
         setValue(CalculatorValues.SubnetMask, getSubnetMaskList().get(index));
         setValue(CalculatorValues.SubnetBits, getSubnetBitsList().get(index));
         setValue(CalculatorValues.MaskBits, getMaskBitsList().get(index));
@@ -127,14 +116,10 @@ public class Calculator {
 
     private void setSubnetID() {
         String[] ipB = getValue(CalculatorValues.IPAddress).split("\\.");
-        for(int i = 0; i < ipB.length; i++) {
-            ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i]));
-        }
+        IntStream.range(0, ipB.length).forEach(i -> ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i])));
 
         String[] maskB = getValue(CalculatorValues.SubnetMask).split("\\.");
-        for(int i = 0; i < maskB.length; i++) {
-            maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i]));
-        }
+        IntStream.range(0, maskB.length).forEach(i -> maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i])));
 
         String[] broadcastAddress = new String[4];
         for(int i = 0; i < broadcastAddress.length; i++) {
@@ -294,14 +279,10 @@ public class Calculator {
         String[] maskW = getValue(CalculatorValues.WildCardMask).split("\\.");
 
         String[] ipB = getValue(CalculatorValues.SubnetID).split("\\.");
-        for(int i = 0; i < ipB.length; i++) {
-            ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i]));
-        }
+        IntStream.range(0, ipB.length).forEach(i -> ipB[i] = Integer.toBinaryString(Integer.parseInt(ipB[i])));
 
         String[] maskB = getValue(CalculatorValues.SubnetMask).split("\\.");
-        for(int i = 0; i < maskB.length; i++) {
-            maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i]));
-        }
+        IntStream.range(0, maskB.length).forEach(i -> maskB[i] = Integer.toBinaryString(Integer.parseInt(maskB[i])));
 
         String[] broadcastAddress = new String[4];
         for(int i = 0; i < broadcastAddress.length; i++) {

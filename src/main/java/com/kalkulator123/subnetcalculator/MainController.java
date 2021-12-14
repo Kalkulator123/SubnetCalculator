@@ -1,53 +1,24 @@
 package com.kalkulator123.subnetcalculator;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 
 public class MainController {
-    Scene scene = SubnetCalculator.scene;
     int index;
     @FXML
-    private TextField IPAddress;
+    private TextField IPAddress, FirstOctetRange, HostAddressRange, SubnetID, BroadcastAddress, SubnetBitmap, HexIPAddress, WildcardMask;
     @FXML
-    private ComboBox SubnetMask;
+    private ComboBox SubnetMask, SubnetBits, MaximumSubnets, MaskBits, HostsPerSubnet;
     @FXML
-    private ComboBox SubnetBits;
-    @FXML
-    private ComboBox MaximumSubnets;
-    @FXML
-    private TextField FirstOctetRange;
-    @FXML
-    private TextField WildcardMask;
-    @FXML
-    private ComboBox MaskBits;
-    @FXML
-    private ComboBox HostsPerSubnet;
-    @FXML
-    private TextField HostAdressRange;
-    @FXML
-    private TextField SubnetID;
-    @FXML
-    private TextField BroadcastAdress;
-    @FXML
-    private TextField SubnetBitmap;
-    @FXML
-    private TextField HexIPAdress;
-    @FXML
-    private RadioButton ClassA;
-    @FXML
-    private RadioButton ClassB;
-    @FXML
-    private RadioButton ClassC;
+    private RadioButton ClassA, ClassB, ClassC;
     @FXML
     private Button SubmitButton;
+
     Calculator calculator;
+
+    private boolean ended = false;
     @FXML
     public void initialize() {
         final ToggleGroup group = new ToggleGroup();
@@ -55,49 +26,30 @@ public class MainController {
         ClassB.setToggleGroup(group);
         ClassC.setToggleGroup(group);
         ClassC.setSelected(true);
-        calculator = new Calculator(scene, "C", "192.168.0.1", 0);
-        SubnetMask.setValue("255.255.255.0");
-        setValues(calculator);
-        calculator.ended = true;
-        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            changeSubnet(0);
-            calculator.ended = false;
-            calculator = new Calculator(scene,
-                    ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
-                    IPAddress.getText(), SubnetMask.getSelectionModel().getSelectedIndex());
-            setValues(calculator);
-            calculator.ended = true;
-        });
-        SubnetMask.valueProperty().addListener((observableValue, o, t1) -> {
-            changeSubnet(SubnetMask.getSelectionModel().getSelectedIndex());
-
-        });
-        SubnetBits.valueProperty().addListener((observableValue, o, t1) -> {
-            changeSubnet(SubnetBits.getSelectionModel().getSelectedIndex());
-        });
-        MaskBits.valueProperty().addListener((observableValue, o, t1) -> {
-            changeSubnet(MaskBits.getSelectionModel().getSelectedIndex());
-        });
-        MaximumSubnets.valueProperty().addListener((observableValue, o, t1) -> {
-            changeSubnet(MaximumSubnets.getSelectionModel().getSelectedIndex());
-        });
-        HostsPerSubnet.valueProperty().addListener((observableValue, o, t1) -> {
-            changeSubnet(HostsPerSubnet.getSelectionModel().getSelectedIndex());
-        });
-        SubmitButton.setOnAction(event -> {
-            calculator.ended = false;
-            calculator = new Calculator(scene,
-                    ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
-                    IPAddress.getText(), calculator.id);
-            setValues(calculator);
-            calculator.ended = true;
+        calculator = new Calculator("C", "", 0);
+        setValues();
+        ended = true;
+        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> calculate());
+        SubnetMask.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(SubnetMask.getSelectionModel().getSelectedIndex()));
+        SubnetBits.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(SubnetBits.getSelectionModel().getSelectedIndex()));
+        MaskBits.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(MaskBits.getSelectionModel().getSelectedIndex()));
+        MaximumSubnets.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(MaximumSubnets.getSelectionModel().getSelectedIndex()));
+        HostsPerSubnet.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(HostsPerSubnet.getSelectionModel().getSelectedIndex()));
+        SubmitButton.setOnAction(event -> calculate());
+        IPAddress.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            if (!newPropertyValue) calculate();
         });
 
     }
-
+    private void calculate(){
+        ended = false;
+        calculator.setIPAddress(ClassA.isSelected() ? "A" : (ClassB.isSelected() ? "B" : "C"),
+                IPAddress.getText(), index);
+        setValues();
+        ended = true;
+    }
     private void changeSubnet(int i) {
-        if(calculator.ended)
-            index = i;
+        if(ended) index = i;
         calculator.setSubnetByIndex(index);
         SubnetBits.getSelectionModel().select(index);
         SubnetMask.getSelectionModel().select(index);
@@ -105,13 +57,13 @@ public class MainController {
         MaximumSubnets.getSelectionModel().select(index);
         HostsPerSubnet.getSelectionModel().select(index);
         WildcardMask.setText(calculator.getValue(CalculatorValues.WildCardMask));
-        HostAdressRange.setText(calculator.getValue(CalculatorValues.HostAddressRange));
-        BroadcastAdress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
+        HostAddressRange.setText(calculator.getValue(CalculatorValues.HostAddressRange));
+        BroadcastAddress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
         SubnetBitmap.setText(calculator.getValue(CalculatorValues.SubnetBitmap));
         SubnetID.setText(calculator.getValue(CalculatorValues.SubnetID));
     }
 
-    private void setValues(Calculator calculator){
+    private void setValues(){
         SubnetMask.setItems(FXCollections.observableList(calculator.getSubnetMaskList()));
         SubnetMask.setValue(calculator.getValue(CalculatorValues.SubnetMask));
         SubnetBits.setItems(FXCollections.observableList(calculator.getSubnetBitsList()));
@@ -125,10 +77,10 @@ public class MainController {
         HostsPerSubnet.setValue(calculator.getValue(CalculatorValues.HostsPerSubnet));
         IPAddress.setText(calculator.getValue(CalculatorValues.IPAddress));
         FirstOctetRange.setText(calculator.getValue(CalculatorValues.FirstOctetRange));
-        HexIPAdress.setText(calculator.getValue(CalculatorValues.HexIPAddress));
+        HexIPAddress.setText(calculator.getValue(CalculatorValues.HexIPAddress));
         WildcardMask.setText(calculator.getValue(CalculatorValues.WildCardMask));
-        HostAdressRange.setText(calculator.getValue(CalculatorValues.HostAddressRange));
-        BroadcastAdress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
+        HostAddressRange.setText(calculator.getValue(CalculatorValues.HostAddressRange));
+        BroadcastAddress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
         SubnetBitmap.setText(calculator.getValue(CalculatorValues.SubnetBitmap));
     }
 

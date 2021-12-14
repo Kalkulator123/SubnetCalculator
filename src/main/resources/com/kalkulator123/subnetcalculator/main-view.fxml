@@ -18,13 +18,13 @@
    <ComboBox fx:id="SubnetBits" prefWidth="150.0" GridPane.rowIndex="7" />
    <ComboBox fx:id="MaximumSubnets" prefWidth="150.0" GridPane.rowIndex="9" />
    <TextField fx:id="FirstOctetRange" editable="false" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-   <TextField fx:id="HexIPAdress" editable="false" layoutX="264.0" layoutY="91.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   <TextField fx:id="HexIPAddress" editable="false" layoutX="264.0" layoutY="91.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
    <TextField fx:id="WildcardMask" editable="false" layoutX="264.0" layoutY="126.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
    <ComboBox fx:id="MaskBits" layoutX="104.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
    <ComboBox fx:id="HostsPerSubnet" layoutX="263.0" layoutY="196.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-   <TextField fx:id="HostAdressRange" editable="false" layoutX="263.0" layoutY="161.0" style="-fx-background-color: lightgray;" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+   <TextField fx:id="HostAddressRange" editable="false" layoutX="263.0" layoutY="161.0" style="-fx-background-color: lightgray;" GridPane.columnSpan="2" GridPane.rowIndex="11" />
    <TextField fx:id="SubnetID" editable="false" layoutX="263.0" layoutY="143.0" style="-fx-background-color: lightgray;" GridPane.rowIndex="13" />
-   <TextField fx:id="BroadcastAdress" editable="false" layoutX="103.0" layoutY="266.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+   <TextField fx:id="BroadcastAddress" editable="false" layoutX="103.0" layoutY="266.0" style="-fx-background-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="13" />
    <TextField fx:id="SubnetBitmap" editable="false" layoutX="103.0" layoutY="231.0" style="-fx-background-color: lightgray;" GridPane.columnSpan="2" GridPane.rowIndex="15" />
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class" />
    <Text layoutX="103.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Octet Range" GridPane.columnIndex="1" />
