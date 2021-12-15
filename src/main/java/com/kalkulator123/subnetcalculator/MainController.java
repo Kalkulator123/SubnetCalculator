@@ -58,6 +58,7 @@ public class MainController {
         BroadcastAddress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
         SubnetBitmap.setText(calculator.getValue(CalculatorValues.SubnetBitmap));
         SubnetID.setText(calculator.getValue(CalculatorValues.SubnetID));
+        setValues();
     }
 
     private void setValues(){
