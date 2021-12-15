@@ -27,6 +27,10 @@ public class MainController {
         calculator = new Calculator("C", "", 0);
         setValues();
         ended = true;
+        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            changeSubnet(0);
+            calculate();
+        });
         group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> calculate());
         SubnetMask.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(SubnetMask.getSelectionModel().getSelectedIndex()));
         SubnetBits.valueProperty().addListener((observableValue, o, t1) -> changeSubnet(SubnetBits.getSelectionModel().getSelectedIndex()));
@@ -58,7 +62,6 @@ public class MainController {
         BroadcastAddress.setText(calculator.getValue(CalculatorValues.BroadcastAddress));
         SubnetBitmap.setText(calculator.getValue(CalculatorValues.SubnetBitmap));
         SubnetID.setText(calculator.getValue(CalculatorValues.SubnetID));
-        setValues();
     }
 
     private void setValues(){
