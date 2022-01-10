@@ -115,7 +115,11 @@
       <GridPane.margin>
          <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
       </GridPane.margin></Text>
-   <Text layoutX="63.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Class" GridPane.columnSpan="2" GridPane.rowIndex="14">
+   <Text layoutX="63.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subnet Bitmap" GridPane.columnSpan="2" GridPane.rowIndex="14">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </GridPane.margin></Text>
+   <Text layoutX="63.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autorzy: Paweł Rozbejko, Michał Majczek, Natan Tylczyński" GridPane.columnSpan="2" GridPane.rowIndex="16">
       <GridPane.margin>
          <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
       </GridPane.margin></Text>
